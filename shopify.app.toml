@@ -1,16 +1,33 @@
-# This file stores configurations for your Shopify app.
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
+client_id = "7fc4c9ba9060b09368d6e81030d1b953"
+name = "qr"
+handle = "qr-48"
+application_url = "https://struct-handles-cylinder-incorrect.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "bravetto-dev.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
 scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://struct-handles-cylinder-incorrect.trycloudflare.com/auth/callback",
+  "https://struct-handles-cylinder-incorrect.trycloudflare.com/auth/shopify/callback",
+  "https://struct-handles-cylinder-incorrect.trycloudflare.com/api/auth/callback"
+]
 
 [webhooks]
 api_version = "2024-07"
 
-  # Mandatory compliance topics for public apps
-  # Delete only if the app is not public
-  # See: https://shopify.dev/docs/apps/build/privacy-law-compliance
   [[webhooks.subscriptions]]
   uri = "/webhooks/customers/data_request"
-  compliance_topics = [ "customers/data_request"]
+  compliance_topics = [ "customers/data_request" ]
 
   [[webhooks.subscriptions]]
   uri = "/webhooks/customers/redact"
@@ -20,15 +37,9 @@ api_version = "2024-07"
   uri = "/webhooks/shop/redact"
   compliance_topics = [ "shop/redact" ]
 
-  # When a shop uninstalls the app, delete the session for that shop
   [[webhooks.subscriptions]]
-  uri = "/webhooks/app/uninstalled"
   topics = [ "app/uninstalled" ]
+  uri = "/webhooks/app/uninstalled"
 
-  # # For reference
-  # # Only receive webhooks for products with a price >= 10.00
-  # # See: https://shopify.dev/docs/apps/build/webhooks/customize/filters
-  # [[webhooks.subscriptions]]
-  # topics = ["products/update"]
-  # uri = "https://example.com/webhooks"
-  # filter = "variants.price:>=10.00"
+[pos]
+embedded = false
